@@ -34,9 +34,6 @@ public final class ImmutableWingSettings implements WingSettings {
         return this.landingExertion;
     }
 
-    /**
-     * Creates an immutable wing settings instance.
-     */
     public static ImmutableWingSettings of(int requiredFlightSatiation, float flyingExertion,
                                            int requiredLandSatiation, float landingExertion) {
         return new ImmutableWingSettings(requiredFlightSatiation, flyingExertion,

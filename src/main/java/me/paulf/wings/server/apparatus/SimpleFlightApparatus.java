@@ -1,44 +1,28 @@
 package me.paulf.wings.server.apparatus;
 
-import me.paulf.wings.server.flight.Flight;
-import net.minecraft.world.entity.player.Player;
-import org.joml.Vector3d;
+import me.paulf.wings.server.item.WingSettings;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.Objects;
-
-public final class SimpleFlightApparatus implements FlightApparatus {
+public class SimpleFlightApparatus implements FlightApparatus {
     private final WingSettings settings;
+    private final ResourceLocation id;
+
+    public SimpleFlightApparatus(WingSettings settings, ResourceLocation id) {
+        this.settings = settings;
+        this.id = id;
+    }
 
     public SimpleFlightApparatus(WingSettings settings) {
-        this.settings = Objects.requireNonNull(settings);
+        this(settings, new ResourceLocation("wings", "none"));
     }
 
     @Override
-    public void onFlight(Player player, Vector3d direction) {
-        int distance = Math.round((float) direction.length() * 100.0F);
-        if (distance > 0) {
-            player.causeFoodExhaustion(distance * this.settings.getFlyingExertion());
-        }
+    public WingSettings getSettings() {
+        return this.settings;
     }
 
     @Override
-    public void onLanding(Player player, Vector3d direction) {
-        player.causeFoodExhaustion(this.settings.getLandingExertion());
-    }
-
-    @Override
-    public boolean isUsable(Player player) {
-        return player.getFoodData().getFoodLevel() >= this.settings.getRequiredFlightSatiation();
-    }
-
-    @Override
-    public boolean isLandable(Player player) {
-        return player.getFoodData().getFoodLevel() >= this.settings.getRequiredLandSatiation();
-    }
-
-    @Override
-    public FlightState createState(Flight flight) {
-        return (player) -> {
-        };
+    public ResourceLocation getId() {
+        return this.id;
     }
 }

@@ -1,7 +1,7 @@
 {
   "key.categories.wings": "Wings",
   "key.wings.fly": "Fly",
-  
+
   "itemGroup.wings.wings": "Wings",
   
   "item.wings.angel_wings_bottle": "Angel Wings Bottle",
@@ -24,9 +24,7 @@
   "commands.wings.take.success.multiple": "Removed wings from %s targets",
   "commands.wings.give.failed": "Unable to apply wings (target already has specified wings)",
   "commands.wings.take.failed": "Target doesn't have wings to remove",
-  
-  "wings.wingsNotFound": "No such wings: %s",
-  
+
   "wings.dreamcatcher.jiu": "JiU's Wings",
   "wings.dreamcatcher.sua": "SuA's Wings",
   "wings.dreamcatcher.siyeon": "Siyeon's Wings",
@@ -35,5 +33,38 @@
   "wings.dreamcatcher.dami": "Dami's Wings",
   "wings.dreamcatcher.gahyeon": "Gahyeon's Wings",
   
-  "subtitles.wings.item.armor.equip_wings": "Wings rustle"
+  "subtitles.wings.item.armor.equip_wings": "Wings rustle",
+
+  "wings.config.common.baseFlightSpeed": "Base Flight Speed",
+  "wings.config.common.baseFlightSpeed.tooltip": "Base multiplier for wing flight speed",
+  "wings.config.common.maxFlightTime": "Maximum Flight Time",
+  "wings.config.common.maxFlightTime.tooltip": "Maximum duration of flight in ticks",
+  "wings.config.common.flightExertion": "Flight Exertion Rate",
+  "wings.config.common.flightExertion.tooltip": "Rate at which flight stamina is consumed",
+  "wings.config.common.enableCreativeFlightSync": "Creative Flight Sync",
+  "wings.config.common.enableCreativeFlightSync.tooltip": "Synchronize creative flight with wing flight",
+
+  "wings.config.client.showWingsMeter": "Show Wings Meter",
+  "wings.config.client.showWingsMeter.tooltip": "Display the wings flight meter on screen",
+  "wings.config.client.wingsMeterPosition": "Wings Meter Position",
+  "wings.config.client.wingsMeterPosition.tooltip": "Position of the wings meter on the screen",
+  "wings.config.client.enableWingsAnimation": "Enable Wings Animation",
+  "wings.config.client.enableWingsAnimation.tooltip": "Enable wing movement animations",
+
+  "advancement.wings.root.title": "Taking to the Skies",
+  "advancement.wings.root.description": "Begin your journey to flight",
+
+  "advancement.wings.get_bat_blood.title": "Blood of the Night",
+  "advancement.wings.get_bat_blood.description": "Obtain Bat Blood, the first step towards creating wings",
+
+  "advancement.wings.first_flight.title": "Spreading Your Wings",
+  "advancement.wings.first_flight.description": "Take your first flight with your new wings",
+
+  "advancement.wings.get_dragon_wings.title": "Dragon's Ascent",
+  "advancement.wings.get_dragon_wings.description": "Craft and obtain the mighty Dragon Wings",
+
+  "wings.subtitle.wing_flap": "Wings flap",
+  "wings.subtitle.wing_glide": "Wings gliding",
+  "wings.subtitle.wing_land": "Wings landing",
+  "wings.subtitle.wing_equip": "Wings equipped"
 }
