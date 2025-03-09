@@ -1,11 +1,22 @@
 package me.paulf.wings;
 
-import me.paulf.wings.server.flight.Flight;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.api.distmarker.Dist;
+
 
 public interface Proxy {
-    void init(IEventBus modEventBus);
 
-    void addFlightListeners(Player player, Flight flight);
+    void init();
+
+    void syncFlight(ServerPlayer player);
+
+    void updateWings(ServerPlayer player);
+
+
+    static Proxy create() {
+        return FMLEnvironment.dist == Dist.CLIENT ?
+                new me.paulf.wings.client.ClientProxy() :
+                new me.paulf.wings.server.ServerProxy();
+    }
 }

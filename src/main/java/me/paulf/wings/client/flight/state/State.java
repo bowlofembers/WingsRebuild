@@ -4,14 +4,16 @@ import me.paulf.wings.client.flight.Animator;
 import me.paulf.wings.server.flight.Flight;
 import me.paulf.wings.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.util.Mth;
+
 import java.util.function.Consumer;
 
 public abstract class State {
     static final int STATE_DELAY = 2;
 
     private final int stateDelay;
+
     private final Consumer<Animator> animation;
+
     private int time;
 
     protected State(Consumer<Animator> animation) {
@@ -44,7 +46,7 @@ public abstract class State {
     }
 
     private float getPitch(double x, double y, double z) {
-        return Mth.toDegrees((float) -Math.atan2(y, Mth.sqrt((float)(x * x + z * z))));
+        return Mth.toDegrees((float) -Math.atan2(y, Math.sqrt(x * x + z * z)));
     }
 
     public final void beginAnimation(Animator animator) {

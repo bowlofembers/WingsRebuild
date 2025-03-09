@@ -1,13 +1,15 @@
 package me.paulf.wings.client.flight;
 
-import org.joml.Vector3f;
-
 public interface Animator {
-    void update();
+    void beginLand();
 
-    default void beginLand() {}
-    default void beginGlide() {}
-    default void beginIdle() {}
-    default void beginLift() {}
-    default void beginFall() {}
+    void beginGlide();
+
+    void beginIdle();
+
+    void beginLift();
+
+    void beginFall();
+
+    void update();
 }

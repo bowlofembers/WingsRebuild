@@ -1,40 +1,51 @@
 package me.paulf.wings.server.net.clientbound;
 
 import me.paulf.wings.server.flight.Flight;
+import me.paulf.wings.server.flight.FlightDefault;
 import me.paulf.wings.server.flight.Flights;
+import me.paulf.wings.server.net.ClientMessageContext;
+import me.paulf.wings.server.net.Message;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.client.multiplayer.ClientLevel;
 
-import java.util.function.Supplier;
 
-public class MessageSyncFlight {
-    private final boolean isFlying;
+public final class MessageSyncFlight implements Message {
+    private int playerId;
+    private final Flight flight;
 
-    public MessageSyncFlight(Flight flight) {
-        this.isFlying = flight.isFlying();
+    public MessageSyncFlight() {
+        this(0, new FlightDefault());
     }
 
-    private MessageSyncFlight(boolean isFlying) {
-        this.isFlying = isFlying;
+    public MessageSyncFlight(Player player, Flight flight) {
+        this(player.getId(), flight);
     }
 
-    public static void encode(MessageSyncFlight message, FriendlyByteBuf buf) {
-        buf.writeBoolean(message.isFlying);
+    private MessageSyncFlight(int playerId, Flight flight) {
+        this.playerId = playerId;
+        this.flight = flight;
     }
 
-    public static MessageSyncFlight decode(FriendlyByteBuf buf) {
-        return new MessageSyncFlight(buf.readBoolean());
+    @Override
+    public void encode(FriendlyByteBuf buf) {
+        buf.writeVarInt(this.playerId);
+        this.flight.serialize(buf);
     }
 
-    public static void handle(MessageSyncFlight message, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            var player = net.minecraft.client.Minecraft.getInstance().player;
-            if (player != null) {
-                Flights.get(player).ifPresent(flight ->
-                        flight.setIsFlying(message.isFlying)
-                );
-            }
-        });
-        ctx.get().setPacketHandled(true);
+    @Override
+    public void decode(FriendlyByteBuf buf) {
+        this.playerId = buf.readVarInt();
+        this.flight.deserialize(buf);
+    }
+
+
+    public static void handle(MessageSyncFlight message, ClientMessageContext context) {
+        ClientLevel level = context.getLevel();
+        if (level != null) {
+            Flights.ifPlayer(level.getEntity(message.playerId),
+                    (player, flight) -> flight.clone(message.flight)
+            );
+        }
     }
 }

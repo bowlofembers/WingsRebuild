@@ -1,38 +1,42 @@
 package me.paulf.wings.server.net.serverbound;
 
+import me.paulf.wings.server.flight.Flight;
 import me.paulf.wings.server.flight.Flights;
+import me.paulf.wings.server.net.Message;
+import me.paulf.wings.server.net.ServerMessageContext;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
 
-import java.util.function.Supplier;
 
-public class MessageControlFlying {
-    private final boolean isFlying;
+public final class MessageControlFlying implements Message {
+    private boolean isFlying;
+
+
+    public MessageControlFlying() {
+    }
+
 
     public MessageControlFlying(boolean isFlying) {
         this.isFlying = isFlying;
     }
 
-    public static void encode(MessageControlFlying message, FriendlyByteBuf buf) {
-        buf.writeBoolean(message.isFlying);
+    @Override
+    public void encode(FriendlyByteBuf buf) {
+        buf.writeBoolean(this.isFlying);
     }
 
-    public static MessageControlFlying decode(FriendlyByteBuf buf) {
-        return new MessageControlFlying(buf.readBoolean());
+    @Override
+    public void decode(FriendlyByteBuf buf) {
+        this.isFlying = buf.readBoolean();
     }
 
-    public static void handle(MessageControlFlying message, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> {
-            var player = ctx.get().getSender();
-            if (player != null) {
-                Flights.get(player).ifPresent(flight -> {
-                    if (flight.canFly(player)) {
-                        flight.setIsFlying(message.isFlying);
-                        flight.sync(Flight.PlayerSet.ofOthers());
-                    }
-                });
-            }
-        });
-        ctx.get().setPacketHandled(true);
+    public static void handle(MessageControlFlying message, ServerMessageContext context) {
+        ServerPlayer player = context.getPlayer();
+        if (player != null) {
+            Flights.get(player)
+                    .filter(f -> f.canFly(player))
+                    .ifPresent(flight -> flight.setIsFlying(message.isFlying, Flight.PlayerSet.ofOthers()));
+        }
     }
 }

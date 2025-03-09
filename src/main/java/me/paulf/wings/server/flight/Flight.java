@@ -5,6 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.phys.Vec3;
+
 import java.util.function.Consumer;
 
 public interface Flight {
@@ -99,12 +100,12 @@ public interface Flight {
 
     interface Notifier {
         void notifySelf();
+
         void notifyPlayer(ServerPlayer player);
+
         void notifyOthers();
 
-        static Notifier of(Runnable notifySelf,
-                           Consumer<ServerPlayer> notifyPlayer,
-                           Runnable notifyOthers) {
+        static Notifier of(Runnable notifySelf, Consumer<ServerPlayer> notifyPlayer, Runnable notifyOthers) {
             return new Notifier() {
                 @Override
                 public void notifySelf() {

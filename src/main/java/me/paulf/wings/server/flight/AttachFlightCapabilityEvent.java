@@ -15,20 +15,42 @@ public final class AttachFlightCapabilityEvent extends Event {
         this.instance = instance;
     }
 
+    /**
+     * Gets the entity that the capabilities are being attached to.
+     *
+     * @return The target entity
+     */
     public Entity getObject() {
         return this.event.getObject();
     }
 
+    /**
+     * Adds a capability provider to the entity.
+     *
+     * @param key The ResourceLocation key for the capability
+     * @param cap The capability provider
+     */
     public void addCapability(ResourceLocation key, ICapabilityProvider cap) {
         this.event.addCapability(key, cap);
     }
 
+    /**
+     * Gets the flight instance being attached.
+     *
+     * @return The flight capability instance
+     */
     public Flight getInstance() {
         return this.instance;
     }
 
-    public static AttachFlightCapabilityEvent create(AttachCapabilitiesEvent<Entity> event,
-                                                     Flight instance) {
+    /**
+     * Creates a new AttachFlightCapabilityEvent.
+     *
+     * @param event The original capability attachment event
+     * @param instance The flight capability instance being attached
+     * @return A new AttachFlightCapabilityEvent
+     */
+    public static AttachFlightCapabilityEvent create(AttachCapabilitiesEvent<Entity> event, Flight instance) {
         return new AttachFlightCapabilityEvent(event, instance);
     }
 }

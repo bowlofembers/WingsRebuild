@@ -1,26 +1,22 @@
 package me.paulf.wings.server.effect;
 
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import me.paulf.wings.server.flight.Flight;
-import me.paulf.wings.WingsMod;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WingedEffect extends MobEffect {
-    public WingedEffect(int color) {
+    protected WingedEffect(int color) {
         super(MobEffectCategory.BENEFICIAL, color);
     }
 
     @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
-        if (entity instanceof Player player && !entity.level().isClientSide) {
-            // Применяем эффект полёта
-            if (!player.getAbilities().flying && !player.isOnGround()) {
-                Flight flight = new Flight(player, WingsMod.instance().getCurrentWings(player));
-                WingsMod.instance().addFlightListeners(player, flight);
-            }
-        }
+    public List<ItemStack> getCurativeItems() {
+        List<ItemStack> ret = new ArrayList<>();
+        ret.add(new ItemStack(WingsItems.BAT_BLOOD_BOTTLE.get()));
+        return ret;
     }
 
     @Override
