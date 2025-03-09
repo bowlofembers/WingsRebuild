@@ -1,0 +1,39 @@
+{
+  "key.categories.wings": "Крылья",
+  "key.wings.fly": "Полёт",
+  
+  "itemGroup.wings.wings": "Крылья",
+  
+  "item.wings.angel_wings_bottle": "Бутылочка с Ангельскими Крыльями",
+  "item.wings.parrot_wings_bottle": "Бутылочка с Крыльями Попугая",
+  "item.wings.slime_wings_bottle": "Бутылочка со Слизневыми Крыльями",
+  "item.wings.blue_butterfly_wings_bottle": "Бутылочка с Голубыми Крыльями Бабочки",
+  "item.wings.monarch_butterfly_wings_bottle": "Бутылочка с Крыльями Бабочки-Монарха",
+  "item.wings.fire_wings_bottle": "Бутылочка с Огненными Крыльями",
+  "item.wings.bat_wings_bottle": "Бутылочка с Крыльями Летучей Мыши",
+  "item.wings.fairy_wings_bottle": "Бутылочка с Крыльями Феи",
+  "item.wings.evil_wings_bottle": "Бутылочка со Злыми Крыльями",
+  "item.wings.dragon_wings_bottle": "Бутылочка с Драконьими Крыльями",
+  "item.wings.bat_blood_bottle": "Бутылочка с Кровью Летучей Мыши",
+  
+  "effect.wings.wings": "Крылья",
+  
+  "commands.wings.give.success.single": "Крылья применены к %s",
+  "commands.wings.give.success.multiple": "Крылья применены к %s целям",
+  "commands.wings.take.success.single": "Крылья удалены у %s",
+  "commands.wings.take.success.multiple": "Крылья удалены у %s целей",
+  "commands.wings.give.failed": "Невозможно применить крылья (у цели уже есть указанные крылья)",
+  "commands.wings.take.failed": "У цели нет крыльев для удаления",
+  
+  "wings.wingsNotFound": "Крылья не найдены: %s",
+  
+  "wings.dreamcatcher.jiu": "Крылья JiU",
+  "wings.dreamcatcher.sua": "Крылья SuA",
+  "wings.dreamcatcher.siyeon": "Крылья Siyeon",
+  "wings.dreamcatcher.handong": "Крылья Handong",
+  "wings.dreamcatcher.yoohyeon": "Крылья Yoohyeon",
+  "wings.dreamcatcher.dami": "Крылья Dami",
+  "wings.dreamcatcher.gahyeon": "Крылья Gahyeon",
+  
+  "subtitles.wings.item.armor.equip_wings": "Шелест крыльев"
+}
